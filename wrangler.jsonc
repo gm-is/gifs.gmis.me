@@ -5,8 +5,18 @@
   "compatibility_date": "2026-05-15",
   "compatibility_flags": ["nodejs_compat"],
   "assets": {
-    "directory": "dist/client"
+    "directory": "dist/client",
+    "binding": "ASSETS",
+    "run_worker_first": true
   },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "gifs-gmis-me-db",
+      "database_id": "13eb2ea5-6bf0-4684-89db-4a9cf79a4b3d",
+      "migrations_dir": "migrations"
+    }
+  ],
   "routes": [
     {
       "pattern": "gifs.gmis.me",

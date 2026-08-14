@@ -186,7 +186,7 @@ export default function Home() {
       <footer className="shell">
         <p>GIF Emotion Atlas</p>
         <p>StockTwits GIF dataset · CLIP ViT-B-32 · Qwen8B + MoSS · KMeans</p>
-        <a href="#overview">Back to top ↑</a>
+        <span className="footer-links"><a href="#overview">Back to top ↑</a><a href="/_access/logout">Sign out ↗</a></span>
       </footer>
     </main>
   );

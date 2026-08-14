@@ -6,7 +6,13 @@ const isCodexSeatbeltSandbox = process.env.CODEX_SANDBOX === "seatbelt";
 
 const localBindingConfig = {
   main: "./worker/index.ts",
-  d1_databases: [],
+  d1_databases: [
+    {
+      binding: "DB",
+      database_name: "gifs-gmis-me-db",
+      database_id: "13eb2ea5-6bf0-4684-89db-4a9cf79a4b3d",
+    },
+  ],
   r2_buckets: [],
 };
 
