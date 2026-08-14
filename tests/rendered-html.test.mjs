@@ -37,6 +37,9 @@ function environment() {
     ASSETS: {
       fetch: async (request) => {
         const pathname = new URL(request.url).pathname;
+        if (pathname === "/_next/static/css/dashboard.css") {
+          return new Response("body{background:#08111d}", { headers: { "content-type": "text/css" } });
+        }
         return pathname === "/assets/high_conf.csv"
           ? new Response("gif_id,emotion\n1,happy\n", { headers: { "content-type": "text/csv" } })
           : new Response("Not found", { status: 404 });
@@ -154,6 +157,18 @@ test("protects data files and serves them only with a valid session", async () =
   assert.match(response.headers.get("content-type") ?? "", /^text\/csv/i);
   assert.match(response.headers.get("cache-control") ?? "", /no-store/i);
   assert.match(await response.text(), /gif_id,emotion/);
+});
+
+test("serves authenticated framework stylesheets through the asset binding", async () => {
+  const { worker, cookie } = await renderAuthenticated();
+  const response = await worker.fetch(
+    new Request("https://gifs.gmis.me/_next/static/css/dashboard.css", { headers: { cookie } }),
+    environment(),
+    context,
+  );
+  assert.equal(response.status, 200);
+  assert.match(response.headers.get("content-type") ?? "", /^text\/css/i);
+  assert.match(await response.text(), /background:#08111d/);
 });
 
 test("keeps the update surface centralized", async () => {

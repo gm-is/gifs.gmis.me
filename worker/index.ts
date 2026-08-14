@@ -31,7 +31,11 @@ const worker = {
     const accessResponse = await handleAccess(request, env);
     if (accessResponse) return accessResponse;
 
-    if (url.pathname.startsWith("/assets/") || url.pathname === "/og.png") {
+    if (
+      url.pathname.startsWith("/_next/static/")
+      || url.pathname.startsWith("/assets/")
+      || url.pathname === "/og.png"
+    ) {
       return protectResponse(await env.ASSETS.fetch(request));
     }
 
