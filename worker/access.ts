@@ -57,9 +57,7 @@ async function verifyPassword(password: string, encodedHash: string): Promise<bo
   const rounds = Number(roundsText);
   if (
     algorithm !== "pbkdf2_sha256"
-    || !Number.isSafeInteger(rounds)
-    || rounds < 100_000
-    || rounds > 1_000_000
+    || rounds !== 100_000
   ) return false;
 
   const salt = bytesFromHex(saltHex);
