@@ -172,10 +172,11 @@ test("serves authenticated framework stylesheets through the asset binding", asy
 });
 
 test("keeps the update surface centralized", async () => {
-  const [page, data, layout, packageJson] = await Promise.all([
+  const [page, data, layout, styles, packageJson] = await Promise.all([
     readFile(new URL("../app/page.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/dashboard-data.ts", import.meta.url), "utf8"),
     readFile(new URL("../app/layout.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
     readFile(new URL("../package.json", import.meta.url), "utf8"),
   ]);
 
@@ -183,5 +184,6 @@ test("keeps the update surface centralized", async () => {
   assert.match(data, /totalGifs: "3,647"/);
   assert.match(data, /agreement: "29\.1%"/);
   assert.match(layout, /https:\/\/gifs\.gmis\.me/);
+  assert.match(styles, /\.hero::before \{ right: 0; width: min\(100%, 360px\); height: 360px; \}/);
   assert.doesNotMatch(packageJson, /react-loading-skeleton|starter/);
 });

@@ -208,6 +208,7 @@ footer a { text-decoration: none; color: var(--muted); }
   nav { gap: 0; }
   h1 { font-size: clamp(3.6rem, 19vw, 5.2rem); }
   .hero { padding: 70px 0; min-height: auto; }
+  .hero::before { right: 0; width: min(100%, 360px); height: 360px; }
   .hero-actions { align-items: flex-start; flex-direction: column; }
   .metrics { grid-template-columns: 1fr; }
   .metric { min-height: 155px; border-right: 0; border-bottom: 1px solid var(--line); }
